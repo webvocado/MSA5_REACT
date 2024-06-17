@@ -1,0 +1,331 @@
+ /* 배경 */
+ body {
+  background: linear-gradient(
+     -45deg,
+     #ffffff,
+     #ffe4e9,
+     #fcc8e2,
+     #dcf6ba,
+     #f1ffd4,
+     #fff6a2,
+     #8eb8ff,
+     #91efff,
+     #d5f9ff
+  );
+  background-size: 400% 400%;
+  animation: gradient 9s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+     background-position: 0% 50%;
+  }
+  50% {
+     background-position: 100% 50%;
+  }
+  100% {
+     background-position: 0% 50%;
+  }
+}
+
+
+ul { margin: 0; padding: 0;}
+
+.container {
+  margin: 100px auto;
+  width: 500px;
+  min-height: 600px;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  background-color: rgb(204, 240, 204);
+}
+
+.header {
+  text-align: center;
+  font-size: 20px;
+  color: green;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+  margin: 10px 0 10px 0;
+}
+
+.form .input {
+  width: 80%;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid green;
+  padding-left: 12px;
+  color: green;
+  font-weight: bold;
+  outline: none;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.form .input::placeholder {
+  color: green;
+  font-weight: bold;
+}
+
+.form .btn {
+  width: 15%;
+}
+
+.btn {
+  width: 80px;
+  height: 40px;
+  padding: 0 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  background-color: rgb(49, 185, 49);
+  color: white;
+}
+
+.btn:hover {
+  background-color: green;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.todoList {
+  height: 500px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+}
+
+.todoItem {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin: 10px 10px 10px 0;
+  border: 2px solid green;
+  border-radius: 12px;
+  color: green;
+  background-color: #fff;
+  font-size: 18px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0 10px 0;
+}
+
+
+
+
+/* 스크롤바 */
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear,
+                     left bottom,
+                     left top,
+                     color-stop(0.44, rgb(77, 224, 138)),
+                     color-stop(0.72, rgb(109, 250, 135)),
+                     color-stop(0.86, rgb(123, 234, 104)));
+}
+
+
+/* 체크박스 */
+.todoItem input {
+  display: none;
+}
+
+.todoItem label {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border: 3px dashed darkgreen;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.todoItem input:checked ~ label {
+  border: 3px solid darkgreen;
+  background-color: green;
+}
+
+.todoItem input:checked ~ span {
+  text-decoration: line-through;
+}
+
+
+.todoItem .item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 내가 혼자 한거 TodoMy TodoListMy */
+/* .container {
+  width: 500px;
+  text-align: center;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  
+  margin: auto;
+  height: auto;
+  border: 3px solid rgb(175, 196, 243);
+  padding: 10px 20px;
+  border-radius: 16px;
+}
+
+
+.todo-title {
+  text-align: center;
+  color: rgb(175, 196, 243);
+}
+
+.todo-input {
+  border: none;
+  width: 80%;
+  border-bottom: 1px solid rgb(175, 196, 243);
+  background-color: transparent;
+}
+
+.todo-input-wrap {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.todo-input-wrap2 {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.todo-item-wrap {
+  width: 100%;
+  display: flex;
+}
+
+.todo-item {
+  width: 100%;
+  background-color: #fff;
+  margin: 10px;
+  border-radius: 8px;
+  border: 3px solid rgb(175, 196, 243);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  align-items : center ;
+}
+
+.todo-item:hover {
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.todo-item:active {
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  border: 3px solid blue;
+}
+
+
+.todo-item button {
+  height: 35px;
+  width: 74px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background-color: rgb(65, 119, 237);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(14, 88, 249);
+}
+
+.todo-item-name {
+  display: flex;
+  column-gap: 10px;
+}
+
+.container-bottom-wrap {
+  width: 100%;
+  display: flex;
+}
+  
+  .container-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 100px 0 30px 0;
+}
+
+
+.container-bottom .deleteAllBtn,
+.container-bottom .completeAllBtn {
+  height: 35px;
+  width: 74px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background-color: rgb(65, 119, 237);
+  cursor: pointer;
+  margin: 10px;
+}
+
+.deleteAllBtn:hover ,
+.completeAllBtn:hover {
+  background-color: rgb(14, 88, 249);
+
+}
+
+.insertBtn {
+  height: 35px;
+  width: 74px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background-color: rgb(65, 119, 237);
+  cursor: pointer;
+} 
+
+*/
+
+
+
+
