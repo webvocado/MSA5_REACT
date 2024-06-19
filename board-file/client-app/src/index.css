@@ -3,8 +3,7 @@
 
 /* 📄 index.css */
 /* CSS 공통 초기화 작업 */
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* * { margin: 0; padding: 0; box-sizing: border-box; } */
 
 body {
   font-family: 'Noto Sans', sans-serif;

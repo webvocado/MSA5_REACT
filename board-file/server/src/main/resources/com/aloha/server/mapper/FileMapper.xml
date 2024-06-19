@@ -47,6 +47,19 @@
         WHERE no = #{no}
     </delete>
 
+    <!-- 선택 삭제 -->
+    <delete id="deleteFiles">
+        DELETE FROM file
+        WHERE no IN ( ${no} )
+    </delete>
+
+    <!-- 파일 목록 삭제 -->
+    <delete id="deleteByParent">
+        DELETE FROM file
+        WHERE parent_table = #{parentTable}
+          AND parent_no = #{parentNo}
+    </delete>
+
     <!-- 파일 목록 - 부모 테이블 기준 -->
     <select id="listByParent" resultType="Files">
         SELECT *

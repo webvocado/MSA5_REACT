@@ -53,7 +53,24 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public int delete(int no) throws Exception {
-        return fileMapper.delete(no);
+        // 1️⃣ 파일 정보 조회
+        Files file = fileMapper.select(no);        
+        // 2️⃣ 파일 경로로 파일 객체 접근
+        String filePath = file.getFilePath();
+        File deleteFile = new File(filePath);
+        // 3️⃣ 파일 시스템의 파일 삭제
+        // - 파일 존재여부 확인
+        if(!deleteFile.exists()) return 0;
+        // - 파일 삭제
+        boolean deleted = deleteFile.delete();
+
+        // 4️⃣ DB 의 파일 데이터 삭제
+        int result = 0;
+        if( deleted ) {
+            result = fileMapper.delete(no);
+            return result;
+        }
+        return result;
     }
 
     @Override
@@ -159,6 +176,24 @@ public class FileServiceImpl implements FileService {
         fis.close();
         sos.close();
         return 1;
+    }
+
+    @Override
+    public int deleteFiles(String no) throws Exception {
+
+        String[] noList = no.split(",");
+
+        int result = 0;
+        for (String deleteNo : noList) {
+            int fileNo = Integer.parseInt(deleteNo);
+            result += delete(fileNo);
+        }
+        return result;
+    }
+
+    @Override
+    public int deleteByParent(Files file) throws Exception {
+        return fileMapper.deleteByParent(file);
     }
 
 }

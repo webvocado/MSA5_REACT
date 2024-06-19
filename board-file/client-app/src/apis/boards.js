@@ -13,7 +13,7 @@ export const insert = (formData, headers)  => axios.post('/boards', formData, he
 // 수정
 // export const update = (no, title, writer, content) => axios.put('/boards', {no, title, writer, content})
 export const update = (formData, headers) => axios.put('/boards', formData, headers)
-// 경로 맨 뒤에 / 붙어있어서 요청 못했음 404 PUT 에러 뜸
+// [오류 피드백] 경로 맨 뒤에 / 붙어있어서 요청 못했음 404 PUT 에러 뜸
 
 
 // 삭제 ( 자바스크립트에서는 delete 라는 예악어가 있어서 사용 불가능 )

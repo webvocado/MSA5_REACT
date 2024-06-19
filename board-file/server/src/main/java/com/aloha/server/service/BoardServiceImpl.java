@@ -34,7 +34,13 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public int update(Board board) throws Exception {
-        return boardMapper.update(board);
+        int result = boardMapper.update(board);
+
+        // 파일 업로드
+        int uploadResult = uploadFiles(board);
+        log.info("파일" + uploadResult + "개 업로드 되었습니다.");
+
+        return result;
     }
 
     @Override
@@ -45,32 +51,53 @@ public class BoardServiceImpl implements BoardService{
         Board newBoard = boardMapper.select(newNo);
 
         // 파일 업로드
-        Files fileInfo = new Files();
-        String parentTable = "board";
-        fileInfo.setParentTable(parentTable);
-        fileInfo.setParentNo(newNo);
-        List<MultipartFile> fileList = board.getFiles();
-
-        if ( fileList == null || fileList.isEmpty() ) {
-            log.info("첨부한 파일이 없습니다.");
-            return newBoard;
-        }
-
-        List<Files> uploadedFileList = fileService.uploadFiles(fileInfo, fileList);
-        if ( uploadedFileList == null || uploadedFileList.isEmpty() ) {
-            log.info("파일 업로드 실패...");
-        }
-        else {
-            log.info("파일 업로드 성공!");
-            log.info(uploadedFileList.toString());
-        }
+        int uploadResult = uploadFiles(board);
+        log.info("파일" + uploadResult + "개 업로드 되었습니다.");
 
         return newBoard;
     }
 
     @Override
     public int delete(int no) throws Exception {
-        return boardMapper.delete(no);
+        int result = boardMapper.delete(no);
+
+        Files file = new Files();
+        file.setParentTable("board");
+        file.setParentNo(no);
+        List<Files> deleteFileList = fileService.listByParent(file);
+
+        for (Files deleteFile : deleteFileList) {
+            fileService.delete(deleteFile.getNo());
+        }
+
+        return result;
+    }
+
+
+
+    public int uploadFiles(Board board) throws Exception {
+        // 파일 업로드
+        Files fileInfo = new Files();
+        String parentTable = "board";
+        fileInfo.setParentTable(parentTable);
+        fileInfo.setParentNo(board.getNo());
+        List<MultipartFile> fileList = board.getFiles();
+
+        if ( fileList == null || fileList.isEmpty() ) {
+            log.info("첨부한 파일이 없습니다.");
+            return 0;
+        }
+
+        List<Files> uploadedFileList = fileService.uploadFiles(fileInfo, fileList);
+        if ( uploadedFileList == null || uploadedFileList.isEmpty() ) {
+            log.info("파일 업로드 실패...");
+            return 0;
+        }
+        else {
+            log.info("파일 업로드 성공!");
+            log.info(uploadedFileList.toString());
+            return uploadedFileList.size();
+        }
     }
     
 }

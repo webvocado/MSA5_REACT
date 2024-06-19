@@ -36,8 +36,8 @@
     background-color: inherit;
 }
 
-.table th:nth-child(1),
-.table td:nth-child(1) {
+.table th:nth-child(1):not(.check),
+.table td:nth-child(1):not(.check) {
     width: 20%;
     text-align: center;
 }
@@ -46,4 +46,3 @@
     width: 80%;
     text-align: center;
 }
-
